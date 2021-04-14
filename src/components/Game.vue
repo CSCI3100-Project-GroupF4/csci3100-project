@@ -214,6 +214,7 @@ export default {
               }
             }
           } else {
+            // if game is over
             clearInterval(game);
             this.ended = true;
             this.finalCoinsEarned = coingett;
