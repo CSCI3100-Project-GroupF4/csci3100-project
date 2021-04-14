@@ -45,6 +45,10 @@ export default {
         skin: "skin_default.png",
         friendsID: []
       }
+    },
+    guest:{
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -86,7 +90,7 @@ export default {
       return require('../assets/' + path);
     },
     gameEndUpdate(score, coin) {
-      this.user.coins += coin;
+      this.user.coins += coin*5;
       this.user.accumulatedScore += score;
       if (score > this.user.highestScore) {
         this.user.highestScore = score;
@@ -241,7 +245,8 @@ export default {
             console.log("final score: " + gameObject.finalScore);
             console.log("final coins: " + gameObject.finalCoinsEarned);
             
-            gameObject.gameEndUpdate(gameObject.finalScore, gameObject.finalCoinsEarned);
+            if (!gameObject.guest)
+              gameObject.gameEndUpdate(gameObject.finalScore, gameObject.finalCoinsEarned);
           }
         }, 1000 / 60);
     };
@@ -254,7 +259,7 @@ export default {
         bullet_txt.innerHTML = "Bullet：" + curbullet + "";
       }
       if (e.keyCode==32 ) {// press space to jump
-        hero.move(0,-200);
+        hero.move(0,-75);
       }
     }
   }

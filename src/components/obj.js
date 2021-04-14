@@ -64,7 +64,7 @@ class Obj {
 		ctx.restore();
 		this.dis++;
 		if (this.y < floor) { //fall when on the sky
-			this.y = this.y + 5;
+			this.y = this.y + 2.5;
 		}
 
 	}
