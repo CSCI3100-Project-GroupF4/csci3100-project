@@ -44,7 +44,9 @@ export default {
       started: false,
       ended: false,
       coinsEarned: 0,
-      startBtnLabel: 'Start'
+      startBtnLabel: 'Start',
+      canvas: null,
+      background: null
     }
   },
   methods: {
@@ -69,10 +71,29 @@ export default {
       this.started = false
       this.ended = false
       this.coinsEarned = 0
-    }
+    },
+    imagePath(path) {
+      if (!path) {
+        path = "avatar_default.png";
+      }
+      return require('../assets/' + path);
+    },
+    /*component(width, height, color, x, y) {
+      this.width = width;
+      this.height = height;
+      this.x = x;
+      this.y = y;
+      this.update = function() {
+        ctx = myGameArea.context;
+      }
+    }*/
   },
   mounted() {
     this.interval = setInterval(this.regenerate, 1000);
+    this.canvas = document.getElementById("myCanvas");
+    var ctx = this.canvas.getContext("2d");
+    ctx.fillStyle = "#AAAAAA";
+    ctx.fillRect(500, 50, 50, 50);
   }
 }
 </script>
@@ -82,6 +103,11 @@ div.game-area {
   width: 600px;
   display: block;
   margin: auto;
+}
+
+canvas { 
+  background:url("../assets/game_bg.png");
+  background-size: 100% 100%;
 }
 
 </style>
