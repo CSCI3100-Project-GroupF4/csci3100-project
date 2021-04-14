@@ -8,7 +8,8 @@
           <img :src="imagePath(selectedSkin)" height="128px">
           <p> UserID: {{ user.userID }} </p>
           <p> Last Active Time: {{ user.lastActiveTime }} </p>
-          <p> Highest Score: {{ user.accumulatedScore }} </p>
+          <p> Highest Score: {{ user.highestScore }} </p>
+          <p> Accumulated Score: {{ user.accumulatedScore }} </p>
           <p> Coins: {{ user.coins }} </p>
       </div>
 
@@ -20,7 +21,7 @@
 
       <label for="skin">  Owned Skins:</label>
       <select id="skin" v-model="selectedSkin">
-        <option value="skin_default.png">Null</option>
+        <option value="skin_default.svg">Null</option>
         <option v-for="(skin, index) in ownedSkin" v-bind:key="index" v-bind:value="skin.itemImage">{{ skin.itemName }}</option>
       </select>
 
