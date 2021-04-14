@@ -9,6 +9,26 @@
           <p> Last Active Time: {{ user.lastActiveTime }} </p>
           <p> Highest Score: {{ user.accumulatedScore }} </p>
           <p> Coins: {{ user.coins }} </p>
+<form action="user.avatar">
+  <label for="avatar">Choose an avatar:</label>
+  <select name="avatar" id="avatar">
+    <option value="cat.png">cat</option>
+    <option value="dog.png">dog</option>
+    <option value="mouse.png">mouse</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+  <form action="user.skin">
+    <label for="skin">Choose an skin:</label>
+    <select name="skin" id="skin">
+      <option value="knight.png">knight</option>
+      <option value="magician.png">magician</option>
+      <option value="warrior.png">warrior</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
       </div>
     </div>
   </div>
