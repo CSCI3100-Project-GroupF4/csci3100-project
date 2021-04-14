@@ -5,15 +5,16 @@
       <canvas id="myCanvas" width="600" height="400" style="border:1px solid #d3d3d3;">
         Your browser does not support the HTML5 canvas tag.
       </canvas>
-      <p>
-        <span v-show="started && ended">Game ended, </span>Coins earned: {{coinsEarned}}
-      </p>
-      <button v-on:click="start()" :disabled="started">{{startBtnLabel}}</button>
-      <button v-on:click="restart()">Restart</button>
       <div id="message_txt" style="display:block;">OUTBOUND RANGERS</div>
-      <div id="score_txt" style="display:block;">Marks：0</div>
-      <div id="coins_txt" style="display:block;">Coins：0</div>
-      <div id="bullet_txt" style="display:block;">bullets：10</div>
+      <table style="width:100%">
+        <tr>
+          <td><div id="score_txt" style="display:block;">Scores：0</div></td>
+          <td><div id="coins_txt" style="display:block;">Coins：0</div></td>
+          <td><div id="bullet_txt" style="display:block;">Bullets：10</div></td>
+        </tr>
+      </table>     
+      <!-- <button v-on:click="start()" :disabled="started">{{startBtnLabel}}</button>
+      <button v-on:click="restart()">Restart</button> -->
     </div>
 
   </div>
@@ -49,7 +50,8 @@ export default {
     return {
       started: false,
       ended: false,
-      coinsEarned: 0,
+      finalCoinsEarned: 0,
+      finalScore: 0,
       startBtnLabel: 'Start',
     }
   },
@@ -74,7 +76,7 @@ export default {
       this.startBtnLabel = 'Start'
       this.started = false
       this.ended = false
-      this.coinsEarned = 0
+      this.finalCoinsEarned = 0
     },
     imagePath(path) {
       if (!path) {
@@ -98,6 +100,9 @@ export default {
     var ctx = this.canvas.getContext("2d");
     ctx.fillStyle = "#AAAAAA";
     ctx.fillRect(500, 50, 50, 50);*/	
+    console.log("final score: " + this.finalScore);
+    console.log("final coins: " + this.finalCoinsEarned);
+
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
     document.addEventListener("keydown", onkeydown);
@@ -151,62 +156,70 @@ export default {
         setInterval(function() {
           coinArray.push(new Coin(imageCoin, canvas.width, floor*Math.random() , 1));
         }, 3000); 
-        setInterval(function () {
+        var game = setInterval(function () {
           context.clearRect(0, 0, canvas.width, canvas.height);
           //draw hero
           if(!gameOver) {
-            hero.draw_me(context, floor);
-          }
-          //draw enemy
-          for (var i = enemyArray.length - 1; i >= 0; i--) {
-              enemyArray[i].draw_enemy(context, floor);
-          }
-          //draw coins
-          for (i = coinArray.length - 1; i >= 0; i--) {
-              coinArray[i].draw(context);
-          }			
-          //draw bullets
-          for (i = bulletArray.length - 1; i >= 0; i--) {
-              bulletArray[i].draw(context);
-          }
-          //collison test
-          for (i = enemyArray.length - 1; i >= 0; i--) {
-            var enemy1=enemyArray[i];
-            if (enemy1!=null && hero!=null && hero.hitTestObject(enemy1))
-            {
-                clearInterval(obj_interval);//clean the interval and no more enemy 
-                enemyArray.splice(i, 1); //clear the enemy				   
-                
-                message_txt.innerHTML="Game Over";
-                gameOver = true;				   
+              hero.draw_me(context, floor);
+            
+            //draw enemy
+            for (var i = enemyArray.length - 1; i >= 0; i--) {
+                enemyArray[i].draw_enemy(context, floor);
             }
-          }
-          for (i = coinArray.length - 1; i >= 0; i--) {
-            var co=coinArray[i];
-            if (co!=null && hero!=null && hero.hitTestObject(co))
-            {
-              coingett+=1;
-              coinArray.splice(i, 1);
-              coins_txt.innerHTML="coins：" + coingett + "";
-              
+            //draw coins
+            for (i = coinArray.length - 1; i >= 0; i--) {
+                coinArray[i].draw(context);
+            }			
+            //draw bullets
+            for (i = bulletArray.length - 1; i >= 0; i--) {
+                bulletArray[i].draw(context);
             }
-          }
-			
-          //judge bullet hit enemy
-          for (var j = bulletArray.length - 1; j >= 0; j--) {
-            var bullet1 = bulletArray[j];			
+            //collison test
             for (i = enemyArray.length - 1; i >= 0; i--) {
-              enemy1 = enemyArray[i];
-              if (enemy1 != null && bullet1 != null && bullet1.hitTestObject(enemy1))//hited!
+              var enemy1=enemyArray[i];
+              if (enemy1!=null && hero!=null && hero.hitTestObject(enemy1))
               {
-                enemyArray.splice(i, 1); //del enemy
-                bulletArray.splice(i, 1); //del bullet
-
-                message_txt.innerHTML = "Hitted!!! + 20";
-                score += 20;
-                score_txt.innerHTML = "score：" + score + "";			   
+                  clearInterval(obj_interval);//clean the interval and no more enemy 
+                  enemyArray.splice(i, 1); //clear the enemy				   
+                  
+                  message_txt.innerHTML="Game Over";
+                  gameOver = true;				   
               }
             }
+            for (i = coinArray.length - 1; i >= 0; i--) {
+              var co=coinArray[i];
+              if (co!=null && hero!=null && hero.hitTestObject(co))
+              {
+                coingett+=1;
+                coinArray.splice(i, 1);
+                coins_txt.innerHTML="Coins：" + coingett + "";
+                
+              }
+            }
+        
+            //judge bullet hit enemy
+            for (var j = bulletArray.length - 1; j >= 0; j--) {
+              var bullet1 = bulletArray[j];			
+              for (i = enemyArray.length - 1; i >= 0; i--) {
+                enemy1 = enemyArray[i];
+                if (enemy1 != null && bullet1 != null && bullet1.hitTestObject(enemy1))//hited!
+                {
+                  enemyArray.splice(i, 1); //del enemy
+                  bulletArray.splice(i, 1); //del bullet
+
+                  message_txt.innerHTML = "Hitted!!! + 20";
+                  score += 20;
+                  score_txt.innerHTML = "Score：" + score + "";			   
+                }
+              }
+            }
+          } else {
+            clearInterval(game);
+            this.ended = true;
+            this.finalCoinsEarned = coingett;
+            this.finalScore = score;
+            console.log("final score: " + this.finalScore);
+            console.log("final coins: " + this.finalCoinsEarned);
           }
         }, 1000 / 60);
     };
@@ -227,6 +240,7 @@ export default {
 </script>
 
 <style scoped>
+
 div.game-area {
   width: 600px;
   display: block;
