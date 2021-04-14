@@ -51,7 +51,7 @@ export default {
         accumulatedScore: 0,
         coins: 0,
         avatar: "avatar_default.png",
-        skin: "skin_default.png",
+        skin: "skin_default.svg",
         friendsID: []
       }
     },

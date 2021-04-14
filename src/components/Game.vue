@@ -42,7 +42,7 @@ export default {
         accumulatedScore: 0,
         coins: 0,
         avatar: "avatar_default.png",
-        skin: "skin_default.png",
+        skin: "skin_default.svg",
         friendsID: []
       }
     },
@@ -85,7 +85,7 @@ export default {
     },
     imagePath(path) {
       if (!path) {
-        path = "skin_default.png";
+        path = "skin_default.svg";
       }
       return require('../assets/' + path);
     },

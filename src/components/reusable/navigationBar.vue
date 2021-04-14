@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <img src="../../assets/logo.png" alt="Game logo">
+    <img src="../../assets/projLogo.jpeg" alt="Game logo">
     <ul>
       <li v-if="Object.keys(this.user).length === 0"><router-link to='/'>Login</router-link></li>
       <li><router-link to='/game'>Game</router-link></li>
@@ -57,8 +57,8 @@ nav img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 ul {
