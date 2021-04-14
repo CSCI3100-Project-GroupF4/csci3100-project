@@ -24,6 +24,7 @@
 import Obj from '@/components/obj'
 import Coin from '@/components/coin'
 import Bullet from '@/components/bullet'
+import axios from "axios"
 
 export default {
   name: "Game",
@@ -83,6 +84,21 @@ export default {
         path = "skin_default.png";
       }
       return require('../assets/' + path);
+    },
+    gameEndUpdate(score, coin) {
+      this.user.coins += coin;
+      this.user.accumulatedScore += score;
+      if (score > this.user.highestScore) {
+        this.user.highestScore = score;
+      }
+      this.updateCurrentUser();
+    },
+    async updateCurrentUser(){
+      //Update user database
+      const url = 'http://localhost:4040/userdata/update/' + this.user._id
+      const response = await axios.post(url, this.user)
+      console.log("User database updating... Response:")
+      console.log(response)
     }
     /*component(width, height, color, x, y) {
       this.width = width;
@@ -100,8 +116,10 @@ export default {
     var ctx = this.canvas.getContext("2d");
     ctx.fillStyle = "#AAAAAA";
     ctx.fillRect(500, 50, 50, 50);*/	
-    console.log("final score: " + this.finalScore);
-    console.log("final coins: " + this.finalCoinsEarned);
+    var gameObject = this;
+
+    console.log("final score: " + gameObject.finalScore);
+    console.log("final coins: " + gameObject.finalCoinsEarned);
 
     var canvas = document.getElementById("myCanvas");
     var context = canvas.getContext("2d");
@@ -147,6 +165,7 @@ export default {
     imageBul.onload = function() {};
     imageMon.src = this.imagePath("monster.svg");
     imageMon.onload = function() {
+        
         hero = new Obj(imageHero, 20, floor, 1);
         //create a monster in depending on the score
         var obj_interval = setInterval(function() {
@@ -216,11 +235,13 @@ export default {
           } else {
             // if game is over
             clearInterval(game);
-            this.ended = true;
-            this.finalCoinsEarned = coingett;
-            this.finalScore = score;
-            console.log("final score: " + this.finalScore);
-            console.log("final coins: " + this.finalCoinsEarned);
+            gameObject.ended = true;
+            gameObject.finalCoinsEarned = coingett;
+            gameObject.finalScore = score;
+            console.log("final score: " + gameObject.finalScore);
+            console.log("final coins: " + gameObject.finalCoinsEarned);
+            
+            gameObject.gameEndUpdate(gameObject.finalScore, gameObject.finalCoinsEarned);
           }
         }, 1000 / 60);
     };
