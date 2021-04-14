@@ -40,8 +40,8 @@ export default {
         highestScore: 0,
         accumulatedScore: 0,
         coins: 0,
-        avatar: "./assets/avatar/default.png",
-        skin: "./assets/skin/default.png",
+        avatar: "avatar_default.png",
+        skin: "skin_default.png",
         friendsID: []
       }
     }
@@ -80,7 +80,7 @@ export default {
     },
     imagePath(path) {
       if (!path) {
-        path = "avatar_default.png";
+        path = "skin_default.png";
       }
       return require('../assets/' + path);
     }
@@ -140,7 +140,7 @@ export default {
     },800);
     
     // load image src
-    imageHero.src = this.imagePath("kitty.svg");
+    imageHero.src = this.imagePath(this.user.skin);
     imageHero.onload = function() {};
     imageCoin.src = this.imagePath("coin.svg");
     imageBul.src = this.imagePath("bullet.svg");
