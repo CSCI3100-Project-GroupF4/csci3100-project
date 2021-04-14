@@ -9,7 +9,7 @@
 		"highestScore": 50,
 		"accumulatedScore": 1000,
 		"coins": 25,
-		"avatar": "avatar_default.png",
+		"avatar": "cat.png",
 		"skin": "skin_default.png",
 		"friendsID": []
 	},
@@ -51,7 +51,7 @@
 		"highestScore": 0,
 		"accumulatedScore": 0,
 		"coins": 0,
-		"avatar": "avatar_default.png",
+		"avatar": "dog.png",
 		"skin": "skin_default.png",
 		"friendsID": [
 		"HiHi123",
@@ -82,8 +82,8 @@
 		"highestScore": 1111,
 		"accumulatedScore": 1111,
 		"coins": 1111,
-		"avatar": "avatar_default.png",
-		"skin": "skin_default.png",
+		"avatar": "mouse.png",
+		"skin": "skin_magician.png",
 		"friendsID": []
 	},
 	"HappyBirthday":
@@ -97,7 +97,7 @@
 		"accumulatedScore": 343434,
 		"coins": 3434,
 		"avatar": "avatar_default.png",
-		"skin": "skin_default.png",
+		"skin": "skin_warrior.png",
 		"friendsID": []
 	},
 	"test":

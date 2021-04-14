@@ -30,7 +30,8 @@ export default {
       this.$emit("logout")
     },
     async updateTime(){
-      this.user.lastActiveTime = Date.now()
+      this.user.lastActiveTime = new Date().toISOString()
+      console.log(this.user.lastActiveTime)
       //Update user database
       const url = 'http://localhost:4040/userdata/update/' + this.user._id
       const response = await axios.post(url, this.user);

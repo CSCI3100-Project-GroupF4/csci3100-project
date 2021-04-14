@@ -151,6 +151,7 @@ export default {
       //Update user database
       const url = 'http://localhost:4040/userdata/update/' + this.user._id
       const response = await axios.post(url, this.user)
+      console.log("User database updating... Response:")
       console.log(response)
     }
   }
