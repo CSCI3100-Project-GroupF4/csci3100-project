@@ -101,7 +101,7 @@ export default {
     remove(input){
       // Check if input is the same as ID of current user
       if(this.user.userID.localeCompare(input) === 0){
-        this.message = "You cannot not unfriend yourself."
+        this.message = "You cannot unfriend yourself."
         return
       }
       // Check if user.friendsID is empty or not
