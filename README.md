@@ -28,7 +28,7 @@ https://www.laravelcode.com/post/vuejs-crud-example-using-mongodb-express-js-vue
 
 https://www.youtube.com/watch?v=uqpM7WVTKI4&t=988s
 
-// Related to CSS
+// Related to CSS (fixed sidebar, login page)
 
 https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp
 
