@@ -228,7 +228,7 @@ export default {
                 if (enemy1 != null && bullet1 != null && bullet1.hitTestObject(enemy1))//hited!
                 {
                   enemyArray.splice(i, 1); //del enemy
-                  bulletArray.splice(i, 1); //del bullet
+                  bulletArray.splice(j, 1); //del bullet
 
                   message_txt.innerHTML = "Hitted!!! + 20";
                   score += 20;
