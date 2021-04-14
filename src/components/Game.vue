@@ -90,7 +90,7 @@ export default {
       return require('../assets/' + path);
     },
     gameEndUpdate(score, coin) {
-      this.user.coins += coin*5;
+      this.user.coins += coin * 10;
       this.user.accumulatedScore += score;
       if (score > this.user.highestScore) {
         this.user.highestScore = score;

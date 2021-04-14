@@ -32,7 +32,7 @@ let userSchema = new Schema({
     },
     skin: {
         type: String,
-        default: "skin_default.png"
+        default: "skin_default.svg"
     },
     friendsID: {
         type: Array,

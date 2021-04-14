@@ -106,7 +106,7 @@ export default {
           accumulatedScore: 1000,
           coins: 25,
           avatar: "avatar_default.png",
-          skin: "skin_default.png",
+          skin: "skin_default.svg",
           friendsID: []
         },
         {
@@ -117,7 +117,7 @@ export default {
           accumulatedScore: 9000,
           coins: 550,
           avatar: "avatar_default.png",
-          skin: "skin_default.png",
+          skin: "skin_default.svg",
           friendsID: []
         },
         {
@@ -128,7 +128,7 @@ export default {
           accumulatedScore: 10000,
           coins: 10,
           avatar: "avatar_default.png",
-          skin: "skin_default.png",
+          skin: "skin_default.svg",
           friendsID: []
         },
         {
@@ -139,7 +139,7 @@ export default {
           accumulatedScore: 0,
           coins: 0,
           avatar: "avatar_default.png",
-          skin: "skin_default.png",
+          skin: "skin_default.svg",
           friendsID: [
             "HiHi123",
             "ABC1999"
