@@ -1,5 +1,7 @@
 # csci3100_project
 
+// Initial Code notes
+
 This branch continas the prototype / early imeplmentation of login page, main menu, leaderboard and manage friends page.
 
 Visiters can login as guest or user, where the former can only get access to "Play", "Leaderboard" and "Logout" options in main menu.
@@ -7,6 +9,12 @@ Visiters can login as guest or user, where the former can only get access to "Pl
 In "Leaderboard" page, users can view the rank of other users according to "HighestScore" or "AccumulatedScore" by clikcing the buttons at head of the table.
 
 In "Friends" page, users can add or remove friends as well as view the ID of their current friends stored in their friend lists.
+
+// Final Code notes 14-04-2021
+
+This branch contains the code for submission.
+
+
 
 Code Reference:
 
