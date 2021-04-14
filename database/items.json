@@ -1,7 +1,7 @@
 {
 	"":
 	{
-		"itemId": 1001,
+		"itemID": 1001,
 		"itemType": "Avatar",
 		"itemName": "Cat",
 		"itemImage": "cat.png",
@@ -9,7 +9,7 @@
 	},
 	"":
 	{
-		"itemId": 1002,
+		"itemID": 1002,
 		"itemType": "Avatar",
 		"itemName": "Dog",
 		"itemImage": "dog.png",
@@ -17,7 +17,7 @@
 	},
 	"":
 	{
-		"itemId": 1003,
+		"itemID": 1003,
 		"itemType": "Avatar",
 		"itemName": "Mouse",
 		"itemImage": "mouse.png",
@@ -25,7 +25,7 @@
 	},
 	"":
 	{
-		"itemId": 2001,
+		"itemID": 2001,
 		"itemType": "Skin",
 		"itemName": "Knight",
 		"itemImage": "logo.png",
@@ -33,7 +33,7 @@
 	},
 	"":
 	{
-		"itemId": 2002,
+		"itemID": 2002,
 		"itemType": "Skin",
 		"itemName": "Magician",
 		"itemImage": "logo.png",
@@ -41,7 +41,7 @@
 	},
 	"":
 	{
-		"itemId": 2003,
+		"itemID": 2003,
 		"itemType": "Skin",
 		"itemName": "Warrior",
 		"itemImage": "logo.png",

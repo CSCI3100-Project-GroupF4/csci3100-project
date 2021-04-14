@@ -59,8 +59,8 @@ export default {
     // Account,
     // Friends
   },
-  mounted(){
-    this.loadUserData()
+  async mounted(){
+    await this.loadUserData()
   },
   data () {
     return {

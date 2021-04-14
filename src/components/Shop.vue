@@ -33,7 +33,7 @@
                   <img :src="imagePath(avatar.itemImage)" class="item-image">
                   <p class="cost">Cost: {{avatar.cost}}</p>
                   <button @click="buyItem(avatar)"
-                          :disabled="avatar.owned || coin < avatar.cost"
+                          :disabled="checkOwned(avatar) || user.coins < avatar.cost"
                           >{{ buyButtonLabel(avatar) }}</button>
                   <div class="clear-float"></div>
                 </div>
@@ -53,7 +53,7 @@
                 <img :src="imagePath(skin.itemImage)" class="item-image">
                 <p class="cost">Cost: {{skin.cost}}</p>
                 <button @click="buyItem(skin)"
-                        :disabled="skin.owned || coin < skin.cost"
+                        :disabled="checkOwned(skin) || user.coins < skin.cost"
                         >{{ buyButtonLabel(skin) }}</button>
                 <div class="clear-float"></div>
               </div>
@@ -93,27 +93,13 @@ export default {
   },
   name: "Shop",
   async mounted() {
-    // Load item database when page is loaded
-    const url = 'http://localhost:4040/itemdata/'
-    const response = await axios.get(url)
-    this.items = response.data
-    console.log(response)
-    console.log(this.items)
-
-    // Load ownership database when page is loaded
-    const url2 = 'http://localhost:4040/ownership/'
-    const response2 = await axios.get(url2)
-    this.ownership = response2.data
-    console.log(response2)
-    console.log(this.ownership)
+    await this.loadDatabase()
   },
   data() {
     return {
-      items: [],
-      ownership: [],
       avatars: [
         {
-          itemId: 1001,
+          itemID: 1001,
           itemType: 'Avatar',
           itemName: 'Cat',
           itemImage: 'cat.png',
@@ -121,7 +107,7 @@ export default {
           owned: false
         },
         {
-          itemId: 1002,
+          itemID: 1002,
           itemType: 'Avatar',
           itemName: 'Dog',
           itemImage: 'dog.png',
@@ -129,7 +115,7 @@ export default {
           owned: false
         },
         {
-          itemId: 1003,
+          itemID: 1003,
           itemType: 'Avatar',
           itemName: 'Mouse',
           itemImage: 'mouse.png',
@@ -139,7 +125,7 @@ export default {
       ],
       skins: [
         {
-          itemId: 2001,
+          itemID: 2001,
           itemType: 'Skin',
           itemName: 'Knight',
           itemImage: 'logo.png',
@@ -147,7 +133,7 @@ export default {
           owned: false
         },
         {
-          itemId: 2002,
+          itemID: 2002,
           itemType: 'Skin',
           itemName: 'Magician',
           itemImage: 'logo.png',
@@ -155,7 +141,7 @@ export default {
           owned: false
         },
         {
-          itemId: 2003,
+          itemID: 2003,
           itemType: 'Skin',
           itemName: 'Warrior',
           itemImage: 'logo.png',
@@ -163,7 +149,8 @@ export default {
           owned: false
         }
       ],
-      coin: 500,
+      ownership: [],
+      // coin: 500,
       tabs: ['Avatar', 'Skin'],
       selectedTab: 'Avatar'
     }
@@ -173,9 +160,23 @@ export default {
       console.log("Exited: " + this.$options.name)
       this.$emit("exit", this.$options.name, "MainMenu")
     },
-    buyItem(item) {
-      this.coin -= item.cost
-      item.owned = true
+    async buyItem(item) {
+      // this.coin -= item.cost
+      // item.owned = true
+
+      //Update user object (direct mutation of parent's object!)
+      this.user.coins -= item.cost
+      await this.updateUserDatabase()
+
+      //Update ownership database
+      const url = 'http://localhost:4040/ownership/create/'
+      const response = await axios.post(url, {
+        userID: this.user.userID,
+        itemID: item.itemID
+      });
+      await this.loadDatabase()
+      console.log("Inserted new entry to ownership database")
+      console.log(response)
     },
     imagePath(path) {
       if (!path) {
@@ -184,18 +185,64 @@ export default {
       return require('../assets/' + path);
     },
     buyButtonLabel(item) {
-      if (item.owned == true) {
+      // if (item.owned == true) {
+      //   return 'Owned'
+      // }
+      // else if (this.coin < item.cost) {
+      //   return 'Not enough coins'
+      // }
+      // else {
+      //   return 'Buy'
+      // }
+
+      const owned = this.checkOwned(item)
+      if (owned === true) {
         return 'Owned'
       }
-      else if (this.coin < item.cost) {
+      else if (this.user.coins < item.cost) {
         return 'Not enough coins'
       }
       else {
         return 'Buy'
       }
     },
-    async updateCurrentUser(){
-      // //Local App.vue storage
+    checkOwned(item){
+      //Check if item is owned
+      const currentUserID = this.user.userID
+      const owned = this.ownership.find(
+          function (element) {
+            return element.userID.localeCompare(currentUserID) === 0 && element.itemID === item.itemID
+          }
+      )
+
+      return owned !== undefined
+    },
+    async loadDatabase(){
+      // Load item database when page is loaded
+      const url = 'http://localhost:4040/itemdata/'
+      const response = await axios.get(url)
+      this.avatars = response.data.filter(
+          function (element) {
+            return element.itemType.localeCompare("Avatar") === 0
+          }
+      )
+      this.skins = response.data.filter(
+          function (element) {
+            return element.itemType.localeCompare("Skin") === 0
+          }
+      )
+      console.log("Item database loading... Response:")
+      console.log(response)
+
+      // Load ownership database when page is loaded
+      const url2 = 'http://localhost:4040/ownership/'
+      const response2 = await axios.get(url2)
+      this.ownership = response2.data
+      console.log("Ownership database loading... Response:")
+      console.log(response2)
+    },
+    async updateUserDatabase(){
+      //Update user object (not needed as direct mutation of parent's object!)
       // this.$emit("update", this.user)
       //Update user database
       const url = 'http://localhost:4040/userdata/update/' + this.user._id

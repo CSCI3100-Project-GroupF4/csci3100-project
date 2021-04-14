@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let itemSchema = new Schema({
-    itemId: {
+    itemID: {
         type: Number,
         default: 1000
     },

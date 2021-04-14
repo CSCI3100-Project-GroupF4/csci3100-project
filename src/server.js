@@ -1,7 +1,3 @@
-// https://www.youtube.com/watch?v=vr6O-IYebXA
-// https://github.com/3stbn/bucket-list-mevn/blob/master/server.js
-// https://www.laravelcode.com/post/vuejs-crud-example-using-mongodb-express-js-vue-js-node-js
-// https://www.youtube.com/watch?v=uqpM7WVTKI4&t=988s
 const express = require('express')
 const server = express()
 const cors = require('cors')
