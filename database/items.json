@@ -28,7 +28,7 @@
 		"itemID": 2001,
 		"itemType": "Skin",
 		"itemName": "Knight",
-		"itemImage": "skin_knight.png",
+		"itemImage": "skin_knight.svg",
 		"cost": 50
 	},
 	"":
@@ -36,7 +36,7 @@
 		"itemID": 2002,
 		"itemType": "Skin",
 		"itemName": "Magician",
-		"itemImage": "skin_magician.png",
+		"itemImage": "skin_magician.svg",
 		"cost": 100
 	},
 	"":
@@ -44,7 +44,7 @@
 		"itemID": 2003,
 		"itemType": "Skin",
 		"itemName": "Warrior",
-		"itemImage": "skin_warrior.png",
+		"itemImage": "skin_warrior.svg",
 		"cost": 150
 	}
 }
