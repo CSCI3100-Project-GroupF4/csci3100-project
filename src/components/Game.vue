@@ -254,7 +254,7 @@ export default {
         bullet_txt.innerHTML = "Bullet：" + curbullet + "";
       }
       if (e.keyCode==32 ) {// press space to jump
-        hero.move(0,-200);
+        hero.move(0,-75);
       }
     }
   }
