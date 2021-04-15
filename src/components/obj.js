@@ -42,12 +42,12 @@ class Obj {
 		return this.y;
 	}
 	//draw enemy
-	draw_enemy(ctx, floor) {
+	draw_enemy(ctx, floor,score) {
 		ctx.save();
 		ctx.translate(this.x, this.y);
 		ctx.drawImage(this.image, 0, 0, 50, 50);
 		ctx.restore();
-		this.x = this.x - 2; //keep moving left
+		this.x = this.x - 2 - score/50; //keep moving left
 		var tryy = this.y + this.speed * 10;
 		while (tryy < 0 || tryy > floor) {
 			this.speed = Math.random() - 0.5;
