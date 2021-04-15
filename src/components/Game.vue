@@ -187,7 +187,7 @@ export default {
             
             //draw enemy
             for (var i = enemyArray.length - 1; i >= 0; i--) {
-                enemyArray[i].draw_enemy(context, floor);
+                enemyArray[i].draw_enemy(context, floor,score);
             }
             //draw coins
             for (i = coinArray.length - 1; i >= 0; i--) {
